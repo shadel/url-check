@@ -15,10 +15,11 @@ async function run() {
         console.log(`Checking ${url} finish: ${res.success}`);
         return res;
     });
-    console.log({ results, errors });
 
-    const failed = results.filter(({ success }) => !success).map((url) => url);
-    const success = results.filter(({ success }) => success).map((url) => url);
+    const failed = results.filter(({ success }) => !success).map(({url}) => url);
+    const success = results.filter(({ success }) => success).map(({url}) => url);
+
+    console.log({ failed, success, errors });
 
     fs.writeFileSync("output.json", JSON.stringify({ failed, success, errors }));
 
